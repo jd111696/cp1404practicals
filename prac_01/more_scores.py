@@ -17,3 +17,5 @@ def calc_score(score):
         return "Passable"
     else:
         return "Bad"
+
+main()
