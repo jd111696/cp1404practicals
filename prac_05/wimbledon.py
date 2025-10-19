@@ -1,6 +1,6 @@
 """Wimbledon stats
 Estimate: 35 minutes
-Actual:   ____ minutes
+Actual:   43 minutes
 """
 
 import csv
@@ -27,7 +27,6 @@ def load_rows(filename: str) -> list[dict]:
         return list(reader)
 
 def count_champions(rows: list[dict]) -> dict[str, int]:
-    """Rows must contain a 'Champion' column."""
     counter = Counter()
     for row in rows:
         champion = row.get("Champion", "").strip()
@@ -36,7 +35,7 @@ def count_champions(rows: list[dict]) -> dict[str, int]:
     return dict(counter)
 
 def collect_countries(rows: list[dict]) -> set[str]:
-    """Rows must contain a 'Country' column; prints ISO-like codes or country strings from the CSV."""
+
     countries: set[str] = set()
     for row in rows:
         country = row.get("Country", "").strip()
@@ -45,4 +44,4 @@ def collect_countries(rows: list[dict]) -> set[str]:
     return countries
 
 if __name__ == "__main__":
-    main(
+    main()
