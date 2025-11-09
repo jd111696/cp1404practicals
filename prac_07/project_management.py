@@ -8,21 +8,44 @@ from project import Project
 
 DEFAULT_FILENAME = "projects.txt"
 
+MENU = """- (L)oad projects  
+- (S)ave projects  
+- (D)isplay projects  
+- (F)ilter projects by date
+- (A)dd new project  
+- (U)pdate project
+- (Q)uit"""
+
 
 def main():
-    """Load projects from the default file and display them."""
-    print("Welcome to Pythonic Project Management")
+    print("Welcome to Python Project Management")
     projects = load_projects(DEFAULT_FILENAME)
     print(f"Loaded {len(projects)} projects from {DEFAULT_FILENAME}")
-    for project in projects:
-        print(project)
+
+    print(MENU)
+    choice = input(">>> ").upper()
+    while choice != "Q":
+        if choice == "L":
+            filename = input("Filename to load projects from: ")
+            projects = load_projects(filename)
+        elif choice == "S":
+            filename = input("Filename to save projects to: ")
+            save_projects(filename, projects)
+        elif choice == "D":
+            display_projects(projects)
+        else:
+            print("Invalid choice")
+        print(MENU)
+        choice = input(">>> ").upper()
+
+    print("Thank you for using this program!")
 
 
 def load_projects(filename):
-    """Load projects from a tab-delimited file, keeping dates as strings."""
+    """Load projects from a file, keeping dates as strings."""
     projects = []
     with open(filename, "r", encoding="utf-8") as in_file:
-        in_file.readline()  # skip header
+        in_file.readline()
         for line in in_file:
             parts = line.strip().split("\t")
             name = parts[0]
@@ -34,6 +57,18 @@ def load_projects(filename):
             projects.append(project)
     return projects
 
+def save_projects(filename, projects):
+    """Save projects to a file."""
+    with open(filename, "w", encoding="utf-8") as out_file:
+        print("Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage", file=out_file)
+        for project in projects:
+            print(f"{project.name}\t{project.start_date}\t{project.priority}\t"
+                  f"{project.cost_estimate}\t{project.completion_percentage}", file=out_file)
+
+def display_projects(projects):
+    """Display all projects"""
+    for project in projects:
+        print(project)
 
 if __name__ == "__main__":
     main()
