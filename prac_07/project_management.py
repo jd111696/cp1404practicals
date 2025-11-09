@@ -4,7 +4,6 @@ Estimated time: 60 minutes
 Actual time:     minutes
 """
 
-from project import Project
 import datetime
 from project import Project
 
@@ -39,6 +38,8 @@ def main():
             add_new_project(projects)
         elif choice == "U":
             update_project(projects)
+        elif choice == "F":
+            filter_projects_by_date(projects)
         else:
             print("Invalid choice")
         print(MENU)
@@ -123,7 +124,20 @@ def parse_date(date_string):
     """Convert a string in the format dd/mm/yyyy to a datetime.date object."""
     return datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
 
+def filter_projects_by_date(projects):
+    """Show projects that start on or after a given date, sorted by start date."""
+    date_string = input("Show projects that start after date (dd/mm/yyyy): ")
+    filter_date = parse_date(date_string)
 
+    filtered_projects = [project for project in projects if project.start_date >= filter_date]
+    filtered_projects = sorted(filtered_projects, key=get_start_date)
+
+    for project in filtered_projects:
+        print(project)
+
+def get_start_date(project):
+    """Return start date of a project."""
+    return project.start_date
 
 if __name__ == "__main__":
     main()
