@@ -27,19 +27,21 @@ class ProgrammingLanguage:
 
 
 def run_tests():
+    """Test ProgrammingLanguage class with all six languages."""
     ruby = ProgrammingLanguage("Ruby", "Dynamic", True, 1995, False)
     python = ProgrammingLanguage("Python", "Dynamic", True, 1991, False)
     visual_basic = ProgrammingLanguage("Visual Basic", "Static", False, 1991, False)
     cplusplus = ProgrammingLanguage("C++", "Static", False, 1983, True)
-    print(ruby)
-    print(python)
-    print(visual_basic)
-    print(cplusplus)
+    java = ProgrammingLanguage("Java", "Static", False, 1995, False)
+    rust = ProgrammingLanguage("Rust", "Static", True, 2010, False)
 
-    languages = [ruby, python, visual_basic]
-    print(python)
+    languages = [ruby, python, visual_basic, cplusplus, java, rust]
 
-    print("The dynamically typed languages are:")
+    print("All languages:")
+    for language in languages:
+        print(language)
+
+    print("\nThe dynamically typed languages are:")
     for language in languages:
         if language.is_dynamic():
             print(language.name)
