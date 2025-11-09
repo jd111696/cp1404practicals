@@ -1,7 +1,7 @@
-"""CP1404/CP5632 Practical - Language file reader using ProgrammingLanguage.
+"""CP1404 Practical - Language file reader
 
-Estimate: ? minutes   Start time: ?
-Actual:   ? minutes   End time: ?
+Estimate: 15 minutes   Start time: 2030
+Actual:   20 minutes   End time: 2050
 """
 
 import csv
