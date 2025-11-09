@@ -5,6 +5,8 @@ Actual time:     minutes
 """
 
 from project import Project
+import datetime
+from project import Project
 
 DEFAULT_FILENAME = "projects.txt"
 
@@ -53,7 +55,8 @@ def load_projects(filename):
         for line in in_file:
             parts = line.strip().split("\t")
             name = parts[0]
-            start_date = parts[1]
+            start_date_string = parts[1]
+            start_date = parse_date(start_date_string)
             priority = int(parts[2])
             cost_estimate = float(parts[3])
             completion_percentage = int(parts[4])
@@ -66,8 +69,10 @@ def save_projects(filename, projects):
     with open(filename, "w", encoding="utf-8") as out_file:
         print("Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage", file=out_file)
         for project in projects:
-            print(f"{project.name}\t{project.start_date}\t{project.priority}\t"
+            date_string = project.start_date.strftime("%d/%m/%Y")
+            print(f"{project.name}\t{date_string}\t{project.priority}\t"
                   f"{project.cost_estimate}\t{project.completion_percentage}", file=out_file)
+
 
 def display_projects(projects):
     """Display incomplete and completed projects, sorted by priority."""
@@ -89,7 +94,8 @@ def add_new_project(projects):
     """Ask the user for project details and add the new project to the list."""
     print("Let's add a new project")
     name = input("Name: ")
-    start_date = input("Start date (dd/mm/yyyy): ")
+    start_date_string = input("Start date (dd/mm/yyyy): ")
+    start_date = parse_date(start_date_string)
     priority = int(input("Priority: "))
     cost_estimate = float(input("Cost estimate: $"))
     completion_percentage = int(input("Percent complete: "))
@@ -112,6 +118,10 @@ def update_project(projects):
     new_priority_input = input("New Priority: ")
     if new_priority_input != "":
         chosen_project.priority = int(new_priority_input)
+
+def parse_date(date_string):
+    """Convert a string in the format dd/mm/yyyy to a datetime.date object."""
+    return datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
 
 
 
