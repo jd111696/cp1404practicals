@@ -33,6 +33,10 @@ def main():
             save_projects(filename, projects)
         elif choice == "D":
             display_projects(projects)
+        elif choice == "A":
+            add_new_project(projects)
+        elif choice == "U":
+            update_project(projects)
         else:
             print("Invalid choice")
         print(MENU)
@@ -80,6 +84,36 @@ def display_projects(projects):
     print("Completed projects:")
     for project in completed_projects:
         print(f"  {project}")
+
+def add_new_project(projects):
+    """Ask the user for project details and add the new project to the list."""
+    print("Let's add a new project")
+    name = input("Name: ")
+    start_date = input("Start date (dd/mm/yyyy): ")
+    priority = int(input("Priority: "))
+    cost_estimate = float(input("Cost estimate: $"))
+    completion_percentage = int(input("Percent complete: "))
+
+    new_project = Project(name, start_date, priority, cost_estimate, completion_percentage)
+    projects.append(new_project)
+
+def update_project(projects):
+    """Choose a project and update its completion percentage and/or priority."""
+    for index, project in enumerate(projects):
+        print(f"{index} {project}")
+    project_choice = int(input("Project choice: "))
+    chosen_project = projects[project_choice]
+    print(chosen_project)
+
+    new_percentage_input = input("New Percentage: ")
+    if new_percentage_input != "":
+        chosen_project.completion_percentage = int(new_percentage_input)
+
+    new_priority_input = input("New Priority: ")
+    if new_priority_input != "":
+        chosen_project.priority = int(new_priority_input)
+
+
 
 if __name__ == "__main__":
     main()
