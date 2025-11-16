@@ -8,8 +8,7 @@ class DynamicLabelsApp(App):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        # Model data
-        self.names = ["Parker", "Jade", "Alex", "Sam"]
+        self.names = ["Jeff", "Fred", "Alex", "Sam"]
 
     def build(self):
         self.title = "Dynamic Labels"
